@@ -1,0 +1,18 @@
+name                "imgui_lib"
+targetName          "imgui_lib"
+targetType          "library"
+description         "D binding of imgui static c++ lib"
+homepage            ""
+copyright           "Copyright (c) 2017 Peter Particle"
+authors             "Peter Particle"
+license             "MIT"
+
+//libs                "lib/imgui"
+lflags              "/LTCG" "/NODEFAULTLIB:LIBCMT" //"/NODEFAULTLIB:MSVCRT" "/NODEFAULTLIB:LIBVCRUNTIME"
+
+//buildOptions      "profile"
+//buildOptions      "profileGC"
+//dub build --build=release --arch=x86_64
+
+buildRequirements   "allowWarnings"
+

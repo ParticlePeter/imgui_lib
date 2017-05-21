@@ -85,7 +85,7 @@ struct ImVec2
 {
     float x = 0, y = 0;
     //  this() { x = y = 0.0f; }
-    this( float x, float y ) nothrow @nogc { this.x = x; this.y = y; }
+    this( float _x, float _y ) nothrow @nogc { x = _x; y = _y; }
     //  version( IM_VEC2_CLASS_EXTRA ) {            // Define constructor and implicit cast operators in imconfig.h to convert back<>forth from your math types and ImVec2.
     //      IM_VEC2_CLASS_EXTRA                     // use mixins in DLand
     //  }

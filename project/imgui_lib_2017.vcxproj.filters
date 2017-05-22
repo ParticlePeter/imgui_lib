@@ -10,6 +10,9 @@
     <ClCompile Include="..\..\imgui\imgui_draw.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\wrapper\imgui_wrapper.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imgui\stb_rect_pack.h">
@@ -31,6 +34,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\imgui\imgui_internal.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wrapper\imgui_wrapper.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

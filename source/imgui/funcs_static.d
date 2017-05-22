@@ -326,7 +326,7 @@ extern( C++, ImGui ) nothrow @nogc {
     bool            Selectable( const( char )* label, bool selected = false, ImGuiSelectableFlags flags = 0 ) {     ImVec2 size = ImVec2( 0, 0 ); return Selectable( label,   selected, flags, size ); }  // size.x==0.0: use remaining width, size.x>0.0: specify width. size.y==0.0: use label height, size.y>0.0: specify height
     bool            Selectable( const( char )* label, bool* p_selected,      ImGuiSelectableFlags flags,  const ref ImVec2 size );
     bool            Selectable( const( char )* label, bool* p_selected,      ImGuiSelectableFlags flags = 0 ) {     ImVec2 size = ImVec2( 0, 0 ); return Selectable( label, p_selected, flags, size ); }
-    bool            ListBox( const( char )* label, int* current_item, const char** items, int items_count, int height_in_items = -1 );
+    bool            ListBox( const( char )* label, int* current_item, const( char )** items, int items_count, int height_in_items = -1 );
     bool            ListBox( const( char )* label, int* current_item, bool function( void* data, int idx, const( char* )* out_text ) items_getter, void* data, int items_count, int height_in_items = -1 );
     bool            ListBoxHeader( const( char )* label, const ref ImVec2 size ); // use if you want to reimplement ListBox() will custom data or interactions. make sure to call ListBoxFooter() afterwards.
     bool            ListBoxHeader( const( char )* label ) {        ImVec2 size = ImVec2( 0, 0 ); return ListBoxHeader( label, size ); }
@@ -449,4 +449,26 @@ extern( C++, ImGui ) nothrow @nogc {
 //  void            DestroyContext( ImGuiContext* ctx );
 //  ImGuiContext*   GetCurrentContext();
 //  void            SetCurrentContext( ImGuiContext* ctx );
+
+
+    // wrapper functions added to circumvent interface bugs
+    void    GetContentRegionMax( ref ImVec2 result );                                              // current content boundaries (typically window boundaries including scrolling, or current column boundaries), in windows coordinates
+    void    GetContentRegionAvail( ref ImVec2 result );                                            // == GetContentRegionMax() - GetCursorPos()
+    void    GetWindowContentRegionMin( ref ImVec2 result );                                        // content boundaries min (roughly (0,0)-Scroll), in window coordinates
+    void    GetWindowContentRegionMax( ref ImVec2 result );                                        // content boundaries max (roughly (0,0)+Size-Scroll) where Size can be override with SetNextWindowContentSize(), in window coordinates
+    void    GetWindowPos( ref ImVec2 result );                                                     // get current window position in screen space (useful if you want to do your own drawing via the DrawList api)
+    void    GetWindowSize( ref ImVec2 result );                                                    // get current window size
+    void    GetFontTexUvWhitePixel( ref ImVec2 result );                                           // get UV coordinate for a while pixel, useful to draw custom shapes via the ImDrawList API
+    void    GetCursorPos( ref ImVec2 result );                                                     // cursor position is relative to window position
+    void    GetCursorStartPos( ref ImVec2 result );                                                // initial cursor position
+    void    GetCursorScreenPos( ref ImVec2 result );                                               // cursor position in absolute screen coordinates [0..io.DisplaySize] (useful to work with ImDrawList API)
+    void    GetItemRectMin( ref ImVec2 result );                                                   // get bounding rect of last item in screen space
+    void    GetItemRectMax( ref ImVec2 result );                                                   // "
+    void    GetItemRectSize( ref ImVec2 result );                                                  // "
+    void    CalcItemRectClosestPoint( ref ImVec2 result,  const ref ImVec2 pos, bool on_edge = false, float outward = 0.0f );   // utility to find the closest point the last item bounding rectangle edge. useful to visually link items
+    void    CalcTextSize( ref ImVec2 result,  const( char )* text, const( char )* text_end = null, bool hide_text_after_double_hash = false, float wrap_width = -1.0f );
+    void    GetMousePos( ref ImVec2 result );                                                      // shortcut to ImGui::GetIO().MousePos provided by user, to be consistent with other calls
+    void    GetMousePosOnOpeningCurrentPopup( ref ImVec2 result );                                 // retrieve backup of mouse positioning at the time of opening popup we have BeginPopup() into
+    void    GetMouseDragDelta( ref ImVec2 result,  int button = 0, float lock_threshold = -1.0f );    // dragging amount since clicking. if lock_threshold < -1.0f uses io.MouseDraggingThreshold
+//  void    CalcTextSizeA( ref ImVec2 result,  float size, float max_width, float wrap_width, const( char )* text_begin, const( char )* text_end = NULL, const( char )** remaining = null ) const; // utf8
 }

@@ -451,7 +451,8 @@ extern( C++, ImGui ) nothrow @nogc {
 //  void            SetCurrentContext( ImGuiContext* ctx );
 
 
-    // wrapper functions added to circumvent interface bugs
+    // wrapper functions added to C++ ImGui lib to circumvent interface bugs, see:
+    // https://forum.dlang.org/thread/dkamxcamwttszxwwxttv@forum.dlang.org?page=1
     void    GetContentRegionMax( ref ImVec2 result );                                              // current content boundaries (typically window boundaries including scrolling, or current column boundaries), in windows coordinates
     void    GetContentRegionAvail( ref ImVec2 result );                                            // == GetContentRegionMax() - GetCursorPos()
     void    GetWindowContentRegionMin( ref ImVec2 result );                                        // content boundaries min (roughly (0,0)-Scroll), in window coordinates

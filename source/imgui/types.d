@@ -89,6 +89,10 @@ struct ImVec2
     //  version( IM_VEC2_CLASS_EXTRA ) {            // Define constructor and implicit cast operators in imconfig.h to convert back<>forth from your math types and ImVec2.
     //      IM_VEC2_CLASS_EXTRA                     // use mixins in DLand
     //  }
+    
+    // without the copy constructop or alternatively the destructor
+    // ImGui functions returning an ImVec2 crash
+    this( this ) nothrow @nogc {}
 }
 
 struct ImVec4
@@ -101,6 +105,10 @@ struct ImVec4
     //  version( IM_VEC4_CLASS_EXTRA ) {            // Define constructor and implicit cast operators in imconfig.h to convert back<>forth from your math types and ImVec4.
     //      IM_VEC4_CLASS_EXTRA                     // use mixins in DLand
     //  }
+
+    // without the copy constructop or alternatively the destructor
+    // ImGui functions returning an ImVec2 crash
+    this( this ) nothrow @nogc {}
 }
 
 
